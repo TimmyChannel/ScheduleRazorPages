@@ -5,15 +5,33 @@
 
 @(
 Html.DevExtreme().Scheduler()
-			.DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
-			.StartDayHour(10)
-			.FirstDayOfWeek(FirstDayOfWeek.Monday)
-			.CurrentView(SchedulerViewType.Week)
-			.RecurrenceEditMode(SchedulerRecurrenceEditMode.Series)
-			.EndDayHour(22)
-			.TimeCellTemplate(new JS("timeCellTemplate"))
+            .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
+            .StartDayHour(10)
+            .FirstDayOfWeek(FirstDayOfWeek.Monday)
+            .CurrentView(SchedulerViewType.Week)
+            .RecurrenceEditMode(SchedulerRecurrenceEditMode.Series)
+            .EndDayHour(22)
+            .TimeCellTemplate(new JS("timeCellTemplate"))
+            .Resources(res=>
+            {
+                res.Add()
+                .FieldExpr("TeacherID")
+                .ColorExpr("Color")
+                .DisplayExpr("Text")
+                .ValueExpr("Id")
+                .AllowMultiple(false)
+                .Label("Teacher");
+            })
+            .OnAppointmentFormOpening("onAppointmentFormOpening")
 )
 <script>
+const onAppointmentFormOpening = (e) => {
+  const form = e.form
+  let mainGroupItems = form
+    .itemOption('mainGroup')
+    .items.filter((item) => item.dataField !== 'description')
+  form.itemOption('mainGroup', 'items', mainGroupItems)
+}
 function timeCellTemplate(data, index, element) {  
         element.text(ConvertTimeformat(data.text))  
     }  

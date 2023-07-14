@@ -1,6 +1,6 @@
 ﻿namespace Schedule.Models
 {
-    public class CalendarEvent
+    public class ScheduleEvent
     {
         public int Id { get; set; }
         public int TeacherID { get; set; }
