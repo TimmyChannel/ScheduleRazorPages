@@ -6,12 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.143" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.9.2" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="23.1.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Schedule.Data\Schedule.Data.csproj" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     </ItemGroup>
 
     <ProjectExtensions><VisualStudio><UserProperties TemplateFeatures="NETCORE" /></VisualStudio></ProjectExtensions>

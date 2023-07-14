@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Schedule.Data;
-
+using Schedule.Models;
 namespace Schedule.Service.Controllers
 {
     public class ScheduleEventController : Controller
     {
-        private readonly IScheduleEventProvider eventProvider;
+        //private readonly IScheduleEventProvider eventProvider;
 
-        public ScheduleEventController(IScheduleEventProvider eventProvider)
-        {
-            this.eventProvider = eventProvider;
-        }
+        //public ScheduleEventController(IScheduleEventProvider eventProvider)
+        //{
+        //    this.eventProvider = eventProvider;
+        //}
         // GET: ScheduleEventController
         public ActionResult Index()
         {

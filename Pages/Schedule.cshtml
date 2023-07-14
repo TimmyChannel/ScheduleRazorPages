@@ -12,7 +12,7 @@ Html.DevExtreme().Scheduler()
             .RecurrenceEditMode(SchedulerRecurrenceEditMode.Series)
             .EndDayHour(22)
             .TimeCellTemplate(new JS("timeCellTemplate"))
-            .Resources(res=>
+       @*     .Resources(res=>
             {
                 res.Add()
                 .FieldExpr("TeacherID")
@@ -21,7 +21,7 @@ Html.DevExtreme().Scheduler()
                 .ValueExpr("Id")
                 .AllowMultiple(false)
                 .Label("Teacher");
-            })
+            })*@
             .OnAppointmentFormOpening("onAppointmentFormOpening")
 )
 <script>

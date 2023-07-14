@@ -1,31 +1,48 @@
-@page
-@using Schedule.Models
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Events page";
+}
 
-<h2>Home</h2>
-
-@(Html.DevExtreme().DataGrid<SampleOrder>()
-    .ShowBorders(true)
-    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
-    .Columns(columns => {
-        columns.AddFor(m => m.OrderID);
-        columns.AddFor(m => m.OrderDate);
-        columns.AddFor(m => m.CustomerName);
-        columns.AddFor(m => m.ShipCountry);
-        columns.AddFor(m => m.ShipCity);
-    })
-    .Paging(p => p.PageSize(10))
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true))
-    .Grouping(g => g.AutoExpandAll(false))
-    .RemoteOperations(true)
-    .Summary(s => s
-        .TotalItems(totalItems => {
-            totalItems.AddFor(m => m.ShipCity).SummaryType(SummaryType.Count);
-        })
-        .GroupItems(groupItems => {
-            groupItems.Add().SummaryType(SummaryType.Count);
-        })
-    )
-    
-)
+<h4>Events</h4>
+<hr />
+@*<p>
+    <a asp-page="/Products/Create">Create New</a>
+</p>*@
+@{
+    TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+            <th scope="col">Date</th>
+            <th scope="col">TeacherID</th>
+            <th scope="col">SubjectID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schevent in Model.Events)
+        {
+            <tr>
+                    <th scope="row">@schevent.Title</th>
+                <td>@schevent.StartTime</td>
+                <td>@schevent.EndTime</td>
+                <td>@schevent.Date</td>
+                <td>@schevent.TeacherID</td>
+                <td>@schevent.SubjectID</td>
+@*                <td><input type="checkbox" checked=@product.Obsolete disabled></td>
+                @{
+                    var modifiedDateTime = product.ModifiedDate > DateTime.MinValue ? TimeZoneInfo.ConvertTimeFromUtc(product.ModifiedDate, cstZone).ToString("dd.MM.yyyy HH:mm:ss") : "N/A";
+                }
+                <td>@modifiedDateTime</td>
+                <td>
+                    <a class="btn btn-primary" asp-page="/Products/Edit" asp-route-id="@product.Id">Edit</a>
+                    <a class="btn btn-danger" asp-page="/Products/Delete" asp-route-id="@product.Id">Delete</a>
+                </td>
+*@            </tr>
+        }
+    </tbody>
+</table>
