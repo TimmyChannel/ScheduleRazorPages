@@ -1,3 +1,4 @@
+using DevExtreme.AspNet.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Schedule.Models;
@@ -10,7 +11,8 @@ namespace Schedule.Pages
         private readonly IScheduleEventRepository _eventRepository;
         public ScheduleModel(IScheduleEventRepository eventRepository)
         {
-            _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository)); 
+            _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
+            _eventRepository.CreateTableIfNotExistsAsync();
         }
 
         [BindProperty]

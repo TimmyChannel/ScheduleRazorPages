@@ -1,11 +1,11 @@
 ﻿@page
 @using Schedule.Models
-
+@model ScheduleModel
 <h2>Schedule</h2>
 
 @(
 Html.DevExtreme().Scheduler()
-            .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("OrderID"))
+            .DataSource(Model.Events)
             .StartDayHour(10)
             .FirstDayOfWeek(FirstDayOfWeek.Monday)
             .CurrentView(SchedulerViewType.Week)
