@@ -5,49 +5,57 @@
 
 @(
 Html.DevExtreme().Scheduler()
-            .DataSource(Model.Events)
-            .StartDayHour(10)
-            .FirstDayOfWeek(FirstDayOfWeek.Monday)
-            .CurrentView(SchedulerViewType.Week)
-            .RecurrenceEditMode(SchedulerRecurrenceEditMode.Series)
-            .EndDayHour(22)
-            .TimeCellTemplate(new JS("timeCellTemplate"))
-       @*     .Resources(res=>
-            {
-                res.Add()
-                .FieldExpr("TeacherID")
-                .ColorExpr("Color")
-                .DisplayExpr("Text")
-                .ValueExpr("Id")
-                .AllowMultiple(false)
-                .Label("Teacher");
-            })*@
-            .OnAppointmentFormOpening("onAppointmentFormOpening")
+			.DataSource(bibob.Appointments)
+			.StartDayHour(10)
+			.FirstDayOfWeek(FirstDayOfWeek.Monday)
+			.CurrentView(SchedulerViewType.Week)
+			.RecurrenceEditMode(SchedulerRecurrenceEditMode.Series)
+			.EndDayHour(22)
+			.TimeZone("America/Los_Angeles")
+		.TextExpr("Text")
+		.StartDateExpr("StartDate")
+		.EndDateExpr("EndDate")
+		.AllDayExpr("AllDay")
+
+			.TimeCellTemplate(new JS("timeCellTemplate"))
+		@*	.Resources(res =>
+			{
+				res.Add()
+				.FieldExpr("TeacherID")
+				.ColorExpr("Color")
+				.DisplayExpr("Text")
+				.ValueExpr("Id")
+				.AllowMultiple(false)
+				.Label("Teacher");
+			})*@
+			.OnAppointmentFormOpening("onAppointmentFormOpening")
 )
 <script>
+	var formatTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "numeric" }).format;
+
 const onAppointmentFormOpening = (e) => {
   const form = e.form
   let mainGroupItems = form
-    .itemOption('mainGroup')
-    .items.filter((item) => item.dataField !== 'description')
+	.itemOption('mainGroup')
+	.items.filter((item) => item.dataField !== 'description')
   form.itemOption('mainGroup', 'items', mainGroupItems)
 }
 function timeCellTemplate(data, index, element) {  
-        element.text(ConvertTimeformat(data.text))  
-    }  
-     function ConvertTimeformat(str) {  
-        if (str == "") return str;  
-        var hours = Number(str.match(/^(\d+)/)[1]);  
-        var minutes = Number(str.match(/:(\d+)/)[1]);  
-        var AMPM = str.match(/\s(.*)$/)[1];  
-        if (AMPM == "PM" && hours < 12) hours = hours + 12;  
-        if (AMPM == "AM" && hours == 12) hours = hours - 12;  
-        var sHours = hours.toString();  
-        var sMinutes = minutes.toString();  
-        if (hours < 10) sHours = "0" + sHours;  
-        if (minutes < 10) sMinutes = "0" + sMinutes;  
-        return sHours + ":" + sMinutes;  
-    }  
+		element.text(ConvertTimeformat(data.text))  
+	}  
+	 function ConvertTimeformat(str) {  
+		if (str == "") return str;  
+		var hours = Number(str.match(/^(\d+)/)[1]);  
+		var minutes = Number(str.match(/:(\d+)/)[1]);  
+		var AMPM = str.match(/\s(.*)$/)[1];  
+		if (AMPM == "PM" && hours < 12) hours = hours + 12;  
+		if (AMPM == "AM" && hours == 12) hours = hours - 12;  
+		var sHours = hours.toString();  
+		var sMinutes = minutes.toString();  
+		if (hours < 10) sHours = "0" + sHours;  
+		if (minutes < 10) sMinutes = "0" + sMinutes;  
+		return sHours + ":" + sMinutes;  
+	}  
 
 </script>
 <p> </p>

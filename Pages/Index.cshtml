@@ -27,12 +27,12 @@
         @foreach (var schevent in Model.Events)
         {
             <tr>
-                    <th scope="row">@schevent.Title</th>
+                    @*<th scope="row">@schevent.Title</th>
                 <td>@schevent.StartTime</td>
                 <td>@schevent.EndTime</td>
                 <td>@schevent.Date</td>
                 <td>@schevent.TeacherID</td>
-                <td>@schevent.SubjectID</td>
+                <td>@schevent.SubjectID</td>*@
 @*                <td><input type="checkbox" checked=@product.Obsolete disabled></td>
                 @{
                     var modifiedDateTime = product.ModifiedDate > DateTime.MinValue ? TimeZoneInfo.ConvertTimeFromUtc(product.ModifiedDate, cstZone).ToString("dd.MM.yyyy HH:mm:ss") : "N/A";
