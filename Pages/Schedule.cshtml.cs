@@ -24,8 +24,8 @@ namespace Schedule.Pages
 		//{
 		//    Events = await _eventRepository.GetAsync().ConfigureAwait(false);
 		//}
-		public static IEnumerable<ScheduleEvent> Events { get => _events; set => _events = value; }
-		private static IEnumerable<ScheduleEvent> _events = new[]
+		public IEnumerable<ScheduleEvent> Events { get => _events; set => _events = value; }
+		private IEnumerable<ScheduleEvent> _events = new[]
 		{
 			new ScheduleEvent
 			{
